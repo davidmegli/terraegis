@@ -1,7 +1,7 @@
 package com.terraegis.terraegis.models;
 
 import jakarta.persistence.*;
-import java.util.List;
+
 import java.time.LocalDateTime;
 
 @Entity
