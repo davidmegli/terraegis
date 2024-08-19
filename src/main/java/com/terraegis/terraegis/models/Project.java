@@ -17,30 +17,23 @@ public class Project {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id", nullable = false)
     private User creator;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sustainability_goal_id", nullable = false)
-    private SustainabilityGoal sustainabilityGoal;
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
-    @Column(name = "funding_goal", nullable = false)
-    private BigDecimal fundingGoal;
+    @Column(name ="valuation", nullable = false)
+    private BigDecimal valuation;
 
-    @Column(name = "current_funds", nullable = false)
-    private BigDecimal currentFunds = BigDecimal.ZERO;
-
-    @Column(name = "start_date", nullable = false)
-    private LocalDateTime startDate = LocalDateTime.now();
-
-    @Column(name = "end_date", nullable = false)
-    private LocalDateTime endDate;
-
-    @Column(name = "is_active", nullable = false)
-    private boolean isActive = true;
-
-    //TODO: define the goals in a quantitative way
+    public Long getId() {
+        return id;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -62,6 +55,14 @@ public class Project {
         this.description = description;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public User getCreator() {
         return creator;
     }
@@ -70,52 +71,19 @@ public class Project {
         this.creator = creator;
     }
 
-    public SustainabilityGoal getSustainabilityGoal() {
-        return sustainabilityGoal;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setSustainabilityGoal(SustainabilityGoal sustainabilityGoal) {
-        this.sustainabilityGoal = sustainabilityGoal;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public BigDecimal getFundingGoal() {
-        return fundingGoal;
+    public BigDecimal getValuation() {
+        return valuation;
     }
 
-    public void setFundingGoal(BigDecimal fundingGoal) {
-        this.fundingGoal = fundingGoal;
+    public void setValuation(BigDecimal valuation) {
+        this.valuation = valuation;
     }
-
-    public BigDecimal getCurrentFunds() {
-        return currentFunds;
-    }
-
-    public void setCurrentFunds(BigDecimal currentFunds) {
-        this.currentFunds = currentFunds;
-    }
-
-    public LocalDateTime getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDateTime getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDateTime endDate) {
-        this.endDate = endDate;
-    }
-
-    public Boolean isActive() {
-        return isActive;
-    }
-
-    public void setStatus(Boolean isActive) {
-        this.isActive = isActive;
-    }
-
 }

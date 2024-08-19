@@ -11,22 +11,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
-
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "password", nullable = false)
     private String passwordHash;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role", nullable = false) // "user" or "admin"
     private String role;
 
     @Column(name = "registration_date", nullable = false)
     private LocalDateTime registrationDate = LocalDateTime.now();
 
+    @Column(name = "bio")
     private String bio;
+
+    @Column(name = "profile_picture_url")
     private String profilePictureUrl;
 
     public Long getId() {
@@ -35,14 +35,6 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {

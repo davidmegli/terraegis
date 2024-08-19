@@ -1,16 +1,12 @@
 package com.terraegis.terraegis.models;
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "sustainability_goal")
-public class SustainabilityGoal {
+@Table(name = "category")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "number", nullable = false)
-    private Long number;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -28,14 +24,6 @@ public class SustainabilityGoal {
 
     public String getName() {
         return name;
-    }
-
-    public Long getNumber() {
-        return number;
-    }
-
-    public void setNumber(Long number) {
-        this.number = number;
     }
 
     public void setName(String name) {
