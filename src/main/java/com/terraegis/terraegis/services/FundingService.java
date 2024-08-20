@@ -17,13 +17,18 @@ public class FundingService {
         return fundingRepository.findById(id);
     }
 
-    public Optional<Funding> getFundingByCampaignId(Long campaignId) {
-        return fundingRepository.findByCampaignId(campaignId);
+    public Optional<List<Funding>> getFundingsByCampaignId(Long campaignId) {
+        return fundingRepository.findFundingsByCampaignId(campaignId);
     }
 
     public Optional<List<Funding>> getFundingsByUserId(Long userId) {
         return fundingRepository.findFundingsByUserId(userId);
     }
+
+    public Optional<List<Funding>> getFundingsByProjectId(Long projectId) {
+        return fundingRepository.findFundingsByProjectId(projectId);
+    }
+
 
     public Optional<List<Funding>> getAllFundings() {
         return Optional.of(fundingRepository.findAll());
@@ -37,9 +42,13 @@ public class FundingService {
         Optional<Funding> funding = fundingRepository.findById(id);
         if (funding.isPresent()) {
             Funding updatedFunding = funding.get();
+            updatedFunding.setId(fundingDetails.getId());
+            updatedFunding.setUserId(fundingDetails.getUserId());
+            updatedFunding.setCampaignId(fundingDetails.getCampaignId());
+            updatedFunding.setRewardId(fundingDetails.getRewardId());
             updatedFunding.setAmount(fundingDetails.getAmount());
-            updatedFunding.setCampaign(fundingDetails.getCampaign());
-            updatedFunding.setUser(fundingDetails.getUser());
+            updatedFunding.setPercentage(fundingDetails.getPercentage());
+            updatedFunding.setDate(fundingDetails.getDate());
             return fundingRepository.save(updatedFunding);
         } else {
             return null;
@@ -55,13 +64,4 @@ public class FundingService {
             return false;
         }
     }
-
-    public Optional<List<Funding>> getFundingsByCampaignId(Long campaignId) {
-        return fundingRepository.findFundingsByCampaignId(campaignId);
-    }
-
-    public Optional<List<Funding>> getFundingsByUserId(Long userId) {
-        return fundingRepository.findFundingsByUserId(userId);
-    }
-
 }

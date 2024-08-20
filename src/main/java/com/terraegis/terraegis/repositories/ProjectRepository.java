@@ -9,4 +9,5 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     Optional<Project> findByTitle(String name);
     Optional<List<Project>> findProjectsByCreatorId(Long creatorId);
+    Optional<List<Project>> findProjectsByCategoryId(Long categoryId);
 }

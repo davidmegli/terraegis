@@ -17,8 +17,8 @@ public class ProjectGoalService {
         return projectGoalRepository.findById(id);
     }
 
-    public Optional<ProjectGoal> getProjectGoalByProjectId(Long projectId) {
-        return projectGoalRepository.findByProjectId(projectId);
+    public Optional<List<ProjectGoal>> getProjectGoalsByProjectId(Long projectId) {
+        return projectGoalRepository.findProjectGoalsByProjectId(projectId);
     }
 
     public Optional<List<ProjectGoal>> getProjectGoalsByUserId(Long userId) {
@@ -37,12 +37,23 @@ public class ProjectGoalService {
         Optional<ProjectGoal> projectGoal = projectGoalRepository.findById(id);
         if (projectGoal.isPresent()) {
             ProjectGoal updatedProjectGoal = projectGoal.get();
-            updatedProjectGoal.setAmount(projectGoalDetails.getAmount());
-            updatedProjectGoal.setProject(projectGoalDetails.getProject());
-            updatedProjectGoal.setUser(projectGoalDetails.getUser());
+            updatedProjectGoal.setId(projectGoalDetails.getId());
+            updatedProjectGoal.setProjectId(projectGoalDetails.getProjectId());
+            updatedProjectGoal.setSustainabilityGoalId(projectGoalDetails.getSustainabilityGoalId());
+            updatedProjectGoal.setDescription(projectGoalDetails.getDescription());
             return projectGoalRepository.save(updatedProjectGoal);
         } else {
             return null;
+        }
+    }
+
+    public boolean deleteProjectGoal(Long id) {
+        Optional<ProjectGoal> projectGoal = projectGoalRepository.findById(id);
+        if (projectGoal.isPresent()) {
+            projectGoalRepository.delete(projectGoal.get());
+            return true;
+        } else {
+            return false;
         }
     }
 }

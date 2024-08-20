@@ -58,4 +58,25 @@ public class ProjectController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // get projects by creator ID
+    @GetMapping("/creator/{creatorId}")
+    public ResponseEntity<List<Project>> getProjectsByCreatorId(@PathVariable Long creatorId) {
+        Optional<List<Project>> projects = projectService.getProjectsByCreatorId(creatorId);
+        return projects.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+    }
+
+    // get projects by title
+    @GetMapping("/title/{title}")
+    public ResponseEntity<Project> getProjectByTitle(@PathVariable String title) {
+        Optional<Project> project = projectService.getProjectByTitle(title);
+        return project.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // get projects by category ID
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<Project>> getProjectsByCategoryId(@PathVariable Long categoryId) {
+        Optional<List<Project>> projects = projectService.getProjectsByCategoryId(categoryId);
+        return projects.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+    }
 }

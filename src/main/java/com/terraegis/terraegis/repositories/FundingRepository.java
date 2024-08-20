@@ -6,4 +6,7 @@ import java.util.Optional;
 import java.util.List;
 
 public interface FundingRepository extends JpaRepository<Funding, Long>{
+    Optional<List<Funding>> findFundingsByCampaignId(Long campaignId);
+    Optional<List<Funding>> findFundingsByUserId(Long userId);
+    Optional<List<Funding>> findFundingsByProjectId(Long projectId);
 }

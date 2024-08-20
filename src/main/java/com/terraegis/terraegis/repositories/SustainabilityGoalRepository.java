@@ -6,4 +6,6 @@ import java.util.Optional;
 import java.util.List;
 
 public interface SustainabilityGoalRepository extends JpaRepository<SustainabilityGoal, Long>{
+    Optional<SustainabilityGoal> findByName(String name);
+    Optional<SustainabilityGoal> findByNumber(Long number);
 }

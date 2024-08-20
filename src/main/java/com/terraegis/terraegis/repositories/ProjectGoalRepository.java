@@ -6,5 +6,6 @@ import java.util.Optional;
 import java.util.List;
 
 public interface ProjectGoalRepository extends JpaRepository<ProjectGoal, Long>{
-
+    Optional<List<ProjectGoal>> findProjectGoalsByProjectId(Long projectId);
+    Optional<List<ProjectGoal>> findProjectGoalsByUserId(Long userId);
 }

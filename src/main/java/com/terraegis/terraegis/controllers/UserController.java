@@ -1,10 +1,9 @@
 package com.terraegis.terraegis.controllers;
 
-import com.terraegis.terraegis.models.Campaign;
-import com.terraegis.terraegis.models.Funding;
-import com.terraegis.terraegis.models.Project;
-import com.terraegis.terraegis.models.User;
+import com.terraegis.terraegis.models.*;
 import com.terraegis.terraegis.services.UserService;
+import com.terraegis.terraegis.services.ProjectService;
+import com.terraegis.terraegis.services.FundingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +18,28 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ProjectService projectService;
+
+    @Autowired
+    private FundingService fundingService;
+
     // create a new user
-    @PostMapping("/create")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        User createdUser = userService.registerUser(user);
         return ResponseEntity.ok(createdUser);
+    }
+
+    // login a user
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody String user, @RequestBody String password) {
+        User loggedInUser = userService.loginUser(user, password);
+        if (loggedInUser != null) {
+            return ResponseEntity.ok(loggedInUser);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
     // get all users
@@ -71,36 +87,51 @@ public class UserController {
 
     // get all projects created by a user
     @GetMapping("/{id}/projects")
-    public ResponseEntity<List<User>> getProjectsByCreatorId(@PathVariable Long creatorId) {
-        Optional<List<User>> projects = userService.findProjectsByCreatorId(creatorId);
+    public ResponseEntity<List<Project>> getProjectsByCreatorId(@PathVariable Long creatorId) {
+        Optional<List<Project>> projects = projectService.getProjectsByCreatorId(creatorId);
         return projects.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
     }
 
     // get all fundings by a user
     @GetMapping("/{id}/fundings")
     public ResponseEntity<List<Funding>> getFundingsByUserId(@PathVariable Long userId) {
-        Optional<List<Funding>> fundings = userService.findFundingsByUserId(userId);
+        Optional<List<Funding>> fundings = fundingService.getFundingsByUserId(userId);
         return fundings.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
     }
 
     // get all campaigns by a user
     @GetMapping("/{id}/campaigns")
     public ResponseEntity<List<Campaign>> getCampaignsByUserId(@PathVariable Long userId) {
-        Optional<List<Campaign>> campaigns = userService.findCampaignsByUserId(userId);
+        Optional<List<Campaign>> campaigns = userService.getCampaignsByUserId(userId);
         return campaigns.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
-    }
-
-    // get all projects by a user
-    @GetMapping("/{id}/projects")
-    public ResponseEntity<List<Project>> getProjectsByUserId(@PathVariable Long userId) {
-        Optional<List<Project>> projects = userService.findProjectsByUserId(userId);
-        return projects.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
     }
 
     // get all projects that a user is financing
     @GetMapping("/{id}/financing-projects")
     public ResponseEntity<List<Project>> getFinancingProjectsByUserId(@PathVariable Long userId) {
-        Optional<List<Project>> projects = userService.findFinancingProjectsByUserId(userId);
+        Optional<List<Project>> projects = userService.getFinancingProjectsByUserId(userId);
         return projects.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
     }
+
+    // get all rewards of a user
+    @GetMapping("/{id}/rewards")
+    public ResponseEntity<List<Reward>> getRewardsByUserId(@PathVariable Long userId) {
+        Optional<List<Reward>> rewards = userService.getRewardsByUserId(userId);
+        return rewards.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+    }
+
+    // get all fundings of a user of donation campaigns
+    @GetMapping("/{id}/donations")
+    public ResponseEntity<List<Funding>> getDonationsByUserId(@PathVariable Long userId) {
+        Optional<List<Funding>> donations = userService.getDonationsByUserId(userId);
+        return donations.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+    }
+
+    // get all fundings of a user of equity campaigns
+    @GetMapping("/{id}/equities")
+    public ResponseEntity<List<Funding>> getEquitiesByUserId(@PathVariable Long userId) {
+        Optional<List<Funding>> equities = userService.getEquitiesByUserId(userId);
+        return equities.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+    }
+
 }

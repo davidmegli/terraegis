@@ -17,14 +17,6 @@ public class RewardService {
         return rewardRepository.findById(id);
     }
 
-    public Optional<Reward> getRewardByProjectId(Long projectId) {
-        return rewardRepository.findByProjectId(projectId);
-    }
-
-    public Optional<List<Reward>> getRewardsByUserId(Long userId) {
-        return rewardRepository.findRewardsByUserId(userId);
-    }
-
     public Optional<List<Reward>> getAllRewards() {
         return Optional.of(rewardRepository.findAll());
     }
@@ -37,9 +29,11 @@ public class RewardService {
         Optional<Reward> reward = rewardRepository.findById(id);
         if (reward.isPresent()) {
             Reward updatedReward = reward.get();
-            updatedReward.setAmount(rewardDetails.getAmount());
-            updatedReward.setProject(rewardDetails.getProject());
-            updatedReward.setUser(rewardDetails.getUser());
+            updatedReward.setId(rewardDetails.getId());
+            updatedReward.setCampaignId(rewardDetails.getCampaignId());
+            updatedReward.setTitle(rewardDetails.getTitle());
+            updatedReward.setDescription(rewardDetails.getDescription());
+            updatedReward.setPrice(rewardDetails.getPrice());
             return rewardRepository.save(updatedReward);
         } else {
             return null;
@@ -56,7 +50,4 @@ public class RewardService {
         }
     }
 
-    public Optional<List<Reward>> getRewardsByProjectId(Long projectId) {
-        return rewardRepository.findRewardsByProjectId(projectId);
-    }
 }

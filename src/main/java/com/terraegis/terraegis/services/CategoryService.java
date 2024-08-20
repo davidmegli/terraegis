@@ -20,10 +20,6 @@ public class CategoryService {
         return categoryRepository.findByName(name);
     }
 
-    public Optional<List<Category>> getCategoriesByProjectId(Long projectId) {
-        return categoryRepository.findCategoriesByProjectId(projectId);
-    }
-
     public Optional<List<Category>> getAllCategories() {
         return Optional.of(categoryRepository.findAll());
     }
@@ -38,7 +34,6 @@ public class CategoryService {
             Category updatedCategory = category.get();
             updatedCategory.setName(categoryDetails.getName());
             updatedCategory.setDescription(categoryDetails.getDescription());
-            updatedCategory.setProject(categoryDetails.getProject());
             return categoryRepository.save(updatedCategory);
         } else {
             return null;
@@ -53,13 +48,5 @@ public class CategoryService {
         } else {
             return false;
         }
-    }
-
-    public Optional<List<Category>> getCategoriesByCreatorId(Long creatorId) {
-        return categoryRepository.findCategoriesByCreatorId(creatorId);
-    }
-
-    public Optional<List<Category>> getCategoriesByProjectId(Long projectId) {
-        return categoryRepository.findCategoriesByProjectId(projectId);
     }
 }

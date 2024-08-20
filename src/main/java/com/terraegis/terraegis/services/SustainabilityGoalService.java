@@ -17,14 +17,6 @@ public class SustainabilityGoalService {
         return sustainabilityGoalRepository.findById(id);
     }
 
-    public Optional<SustainabilityGoal> getSustainabilityGoalByProjectId(Long projectId) {
-        return sustainabilityGoalRepository.findByProjectId(projectId);
-    }
-
-    public Optional<List<SustainabilityGoal>> getSustainabilityGoalsByUserId(Long userId) {
-        return sustainabilityGoalRepository.findSustainabilityGoalsByUserId(userId);
-    }
-
     public Optional<List<SustainabilityGoal>> getAllSustainabilityGoals() {
         return Optional.of(sustainabilityGoalRepository.findAll());
     }
@@ -33,13 +25,22 @@ public class SustainabilityGoalService {
         return sustainabilityGoalRepository.save(sustainabilityGoal);
     }
 
+    public Optional<SustainabilityGoal> getSustainabilityGoalByNumber(Long number) {
+        return sustainabilityGoalRepository.findByNumber(number);
+    }
+
+    public Optional<SustainabilityGoal> getSustainabilityGoalByName(String name) {
+        return sustainabilityGoalRepository.findByName(name);
+    }
+
     public SustainabilityGoal updateSustainabilityGoal(Long id, SustainabilityGoal sustainabilityGoalDetails) {
         Optional<SustainabilityGoal> sustainabilityGoal = sustainabilityGoalRepository.findById(id);
         if (sustainabilityGoal.isPresent()) {
             SustainabilityGoal updatedSustainabilityGoal = sustainabilityGoal.get();
-            updatedSustainabilityGoal.setAmount(sustainabilityGoalDetails.getAmount());
-            updatedSustainabilityGoal.setProject(sustainabilityGoalDetails.getProject());
-            updatedSustainabilityGoal.setUser(sustainabilityGoalDetails.getUser());
+            updatedSustainabilityGoal.setId(sustainabilityGoalDetails.getId());
+            updatedSustainabilityGoal.setNumber(sustainabilityGoalDetails.getNumber());
+            updatedSustainabilityGoal.setName(sustainabilityGoalDetails.getName());
+            updatedSustainabilityGoal.setDescription(sustainabilityGoalDetails.getDescription());
             return sustainabilityGoalRepository.save(updatedSustainabilityGoal);
         } else {
             return null;
@@ -54,13 +55,5 @@ public class SustainabilityGoalService {
         } else {
             return false;
         }
-    }
-
-    public Optional<List<SustainabilityGoal>> getSustainabilityGoalsByProjectId(Long projectId) {
-        return sustainabilityGoalRepository.findSustainabilityGoalsByProjectId(projectId);
-    }
-
-    public Optional<List<SustainabilityGoal>> getSustainabilityGoalsByUserId(Long userId) {
-        return sustainabilityGoalRepository.findSustainabilityGoalsByUserId(userId);
     }
 }

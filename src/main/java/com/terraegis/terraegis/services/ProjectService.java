@@ -24,6 +24,10 @@ public class ProjectService {
         return projectRepository.findProjectsByCreatorId(creatorId);
     }
 
+    public Optional<List<Project>> getProjectsByCategoryId(Long categoryId) {
+        return projectRepository.findProjectsByCategoryId(categoryId);
+    }
+
     public Optional<List<Project>> getAllProjects() {
         return Optional.of(projectRepository.findAll());
     }

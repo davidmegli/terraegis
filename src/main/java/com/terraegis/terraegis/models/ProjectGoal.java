@@ -43,4 +43,12 @@ public class ProjectGoal {
     public void setSustainabilityGoalId(SustainabilityGoal sustainabilityGoalId) {
         this.sustainabilityGoalId = sustainabilityGoalId;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
