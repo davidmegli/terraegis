@@ -18,11 +18,7 @@ public class ProjectGoalService {
     }
 
     public Optional<List<ProjectGoal>> getProjectGoalsByProjectId(Long projectId) {
-        return projectGoalRepository.findProjectGoalsByProjectId(projectId);
-    }
-
-    public Optional<List<ProjectGoal>> getProjectGoalsByUserId(Long userId) {
-        return projectGoalRepository.findProjectGoalsByUserId(userId);
+        return projectGoalRepository.findProjectGoalsByProjectId_Id(projectId);
     }
 
     public Optional<List<ProjectGoal>> getAllProjectGoals() {

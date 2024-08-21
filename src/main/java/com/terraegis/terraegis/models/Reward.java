@@ -10,7 +10,7 @@ public class Reward {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @Column(name="campaign_id", nullable = false)
+    @JoinColumn(name="campaign_id", nullable = false)
     private Campaign campaignId;
 
     @Column(name="title", nullable = false)

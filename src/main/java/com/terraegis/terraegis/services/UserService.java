@@ -25,7 +25,7 @@ public class UserService {
     private CampaignRepository campaignRepository;
 
     public Optional<List<Project>> findProjectsByCreatorId(Long creatorId) {
-        return projectRepository.findProjectsByCreatorId(creatorId);
+        return projectRepository.findProjectsByCreatorId_Id(creatorId);
     }
 
     public Optional<List<User>> getAllUsers() {
@@ -78,11 +78,11 @@ public class UserService {
     }
 
     public Optional<List<Funding>> getFundingsByUserId(Long userId) {
-        return fundingRepository.findFundingsByUserId(userId);
+        return fundingRepository.findFundingsByUserId_Id(userId);
     }
 
     public Optional<List<Campaign>> getCampaignsByUserId(Long userId) {
-        Optional<List<Funding>> fundingsByUser = fundingRepository.findFundingsByUserId(userId);
+        Optional<List<Funding>> fundingsByUser = fundingRepository.findFundingsByUserId_Id(userId);
         List<Campaign> campaigns = new ArrayList<>();
         fundingsByUser.ifPresent(fundings -> {
             fundings.forEach(funding -> {
@@ -95,7 +95,7 @@ public class UserService {
     }
 
     public Optional<List<Project>> getFinancingProjectsByUserId(Long userId) {
-        Optional<List<Funding>> fundingsByUser = fundingRepository.findFundingsByUserId(userId);
+        Optional<List<Funding>> fundingsByUser = fundingRepository.findFundingsByUserId_Id(userId);
         List<Project> projects = new ArrayList<>();
         // get all campaigns ids in fundingsByUser
         List<Long> campaignIds = new ArrayList<>();
@@ -126,7 +126,7 @@ public class UserService {
     }
 
     public Optional<List<Funding>> getEquitiesByUserId(Long userId) {
-        Optional<List<Funding>> fundingsByUser = fundingRepository.findFundingsByUserId(userId);
+        Optional<List<Funding>> fundingsByUser = fundingRepository.findFundingsByUserId_Id(userId);
         List<Funding> equities = new ArrayList<>();
         fundingsByUser.ifPresent(fundings -> {
             fundings.forEach(funding -> {
@@ -139,7 +139,7 @@ public class UserService {
     }
 
     public Optional<List<Funding>> getDonationsByUserId(Long userId) {
-        Optional<List<Funding>> fundingsByUser = fundingRepository.findFundingsByUserId(userId);
+        Optional<List<Funding>> fundingsByUser = fundingRepository.findFundingsByUserId_Id(userId);
         List<Funding> donations = new ArrayList<>();
         fundingsByUser.ifPresent(fundings -> {
             fundings.forEach(funding -> {
@@ -152,7 +152,7 @@ public class UserService {
     }
 
     public Optional<List<Reward>> getRewardsByUserId(Long userId) {
-        Optional<List<Funding>> fundingsByUser = fundingRepository.findFundingsByUserId(userId);
+        Optional<List<Funding>> fundingsByUser = fundingRepository.findFundingsByUserId_Id(userId);
         List<Reward> rewards = new ArrayList<>();
         fundingsByUser.ifPresent(fundings -> {
             fundings.forEach(funding -> {

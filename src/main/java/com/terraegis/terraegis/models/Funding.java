@@ -10,11 +10,11 @@ public class Funding {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "campaign_id", nullable = false)
+    @JoinColumn(name = "campaign_id", nullable = false)
     private Campaign campaignId;
 
     //if the campaign is a reward campaign, the amount will be the price of the reward
@@ -27,7 +27,7 @@ public class Funding {
     private Long percentage;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "reward_id", nullable = true)
+    @JoinColumn(name = "reward_id", nullable = true)
     private Reward rewardId;
 
     @Column(name = "date", nullable = false)

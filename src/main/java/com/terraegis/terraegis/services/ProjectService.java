@@ -21,11 +21,11 @@ public class ProjectService {
     }
 
     public Optional<List<Project>> getProjectsByCreatorId(Long creatorId) {
-        return projectRepository.findProjectsByCreatorId(creatorId);
+        return projectRepository.findProjectsByCreatorId_Id(creatorId);
     }
 
     public Optional<List<Project>> getProjectsByCategoryId(Long categoryId) {
-        return projectRepository.findProjectsByCategoryId(categoryId);
+        return projectRepository.findProjectsByCategoryId_Id(categoryId);
     }
 
     public Optional<List<Project>> getAllProjects() {

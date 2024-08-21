@@ -14,7 +14,7 @@ public class ProjectGoal {
     private Project projectId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @Column(name = "sustainability_goal_id", nullable = false)
+    @JoinColumn(name = "sustainability_goal_id", nullable = false)
     private SustainabilityGoal sustainabilityGoalId;
 
     @Column(name = "description", nullable = false)

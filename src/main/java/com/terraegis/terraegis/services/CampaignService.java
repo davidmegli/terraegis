@@ -25,7 +25,7 @@ public class CampaignService {
     }
 
     public Optional<List<Campaign>> getCampaignsByProjectId(Long projectId) {
-        return campaignRepository.findCampaignsByProjectId(projectId);
+        return campaignRepository.findCampaignsByProjectId_Id(projectId);
     }
 
     public Optional<List<Campaign>> getAllCampaigns() {
@@ -66,7 +66,7 @@ public class CampaignService {
     }
 
     public Optional<List<Campaign>> getCampaignsByCreatorId(Long creatorId) {
-        return campaignRepository.findCampaignsByProjectId(creatorId);
+        return campaignRepository.findCampaignsByProjectId_Id(creatorId);
     }
 
     public Optional<List<Campaign>> getActiveCampaigns() {
