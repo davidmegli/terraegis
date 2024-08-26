@@ -70,7 +70,7 @@ class UserTest {
 
     @Test
     void setEmail() {
-        String newEmail = "janedoe@example.com";
+        String newEmail = "bob@example.com";
         user.setEmail(newEmail);
         assertEquals(newEmail, user.getEmail());
     }
