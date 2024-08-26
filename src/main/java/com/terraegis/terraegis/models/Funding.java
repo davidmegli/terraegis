@@ -1,6 +1,7 @@
 package com.terraegis.terraegis.models;
 import  jakarta.persistence.*;
 import java.util.Date;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "funding")
@@ -23,6 +24,7 @@ public class Funding {
     @Column(name = "amount", nullable = false)
     private Long amount;
 
+    @Size(min = 0, max = 100)
     @Column(name = "percentage", nullable = false)
     private Long percentage;
 

@@ -17,7 +17,7 @@ public class Campaign {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", length = 5000, nullable = false)
     private String description;
 
     @Column(name = "start_date", nullable = false)

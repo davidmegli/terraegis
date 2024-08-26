@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +13,9 @@ public class User {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "description", length = 1000, nullable = false)
+    private String description;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -35,6 +38,31 @@ public class User {
     @Column(name = "profile_picture_url")
     private String profilePictureUrl;
 
+    public User() {
+    }
+
+    public User(String name, String description, String email, String passwordHash, String type, String role, LocalDateTime date) {
+        this.name = name;
+        this.description = description;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.type = type;
+        this.role = role;
+        this.registrationDate = date;
+    }
+
+    public User(String name, String description, String email, String passwordHash, String type, String role, LocalDateTime date, String bio, String profilePictureUrl) {
+        this.name = name;
+        this.description = description;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.type = type;
+        this.role = role;
+        this.registrationDate = date;
+        this.bio = bio;
+        this.profilePictureUrl = profilePictureUrl;
+    }
+
     public Long getId() {
         return id;
     }
@@ -49,6 +77,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getEmail() {

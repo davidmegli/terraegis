@@ -15,8 +15,17 @@ public class SustainabilityGoal {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", length = 1000, nullable = false)
     private String description;
+
+    public SustainabilityGoal() {
+    }
+
+    public SustainabilityGoal(Long number, String name, String description) {
+        this.number = number;
+        this.name = name;
+        this.description = description;
+    }
 
     public Long getId() {
         return id;

@@ -56,4 +56,12 @@ public class SustainabilityGoalService {
             return false;
         }
     }
+
+    public void saveGoalsIfNotExists(List<SustainabilityGoal> goals) {
+        for (SustainabilityGoal goal : goals) {
+            if (!sustainabilityGoalRepository.existsByNumber(goal.getNumber())) {
+                sustainabilityGoalRepository.save(goal);
+            }
+        }
+    }
 }

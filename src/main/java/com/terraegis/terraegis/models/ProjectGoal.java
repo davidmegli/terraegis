@@ -17,7 +17,7 @@ public class ProjectGoal {
     @JoinColumn(name = "sustainability_goal_id", nullable = false)
     private SustainabilityGoal sustainabilityGoalId;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", length = 1000, nullable = false)
     private String description;
 
     public Long getId() {
