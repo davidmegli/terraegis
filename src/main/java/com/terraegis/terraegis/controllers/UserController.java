@@ -147,5 +147,4 @@ public class UserController {
         Optional<List<Funding>> equities = userService.getEquitiesByUserId(userId);
         return equities.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
     }
-
 }
