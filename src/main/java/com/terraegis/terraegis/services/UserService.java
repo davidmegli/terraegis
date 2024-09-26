@@ -77,6 +77,16 @@ public class UserService {
         }
     }
 
+    public boolean deleteUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            userRepository.delete(user.get());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public Optional<List<Funding>> getFundingsByUserId(Long userId) {
         return fundingRepository.findFundingsByUserId_Id(userId);
     }

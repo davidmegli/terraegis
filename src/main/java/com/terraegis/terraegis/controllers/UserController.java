@@ -4,6 +4,7 @@ import com.terraegis.terraegis.models.*;
 import com.terraegis.terraegis.services.UserService;
 import com.terraegis.terraegis.services.ProjectService;
 import com.terraegis.terraegis.services.FundingService;
+import com.terraegis.terraegis.models.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +34,10 @@ public class UserController {
 
     // login a user
     @PostMapping("/login")
-    public ResponseEntity<User> loginUser(@RequestBody String user, @RequestBody String password) {
-        User loggedInUser = userService.loginUser(user, password);
+    public ResponseEntity<User> loginUser(@RequestBody LoginRequest loginRequest) {
+        String email = loginRequest.getEmail();
+        String password = loginRequest.getPassword();
+        User loggedInUser = userService.loginUser(email, password);
         if (loggedInUser != null) {
             return ResponseEntity.ok(loggedInUser);
         } else {
@@ -71,6 +74,17 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         boolean isDeleted = userService.deleteUser(id);
+        if (isDeleted) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // delete user by email
+    @DeleteMapping("/delete/email/{email}")
+    public ResponseEntity<Void> deleteUserByEmail(@PathVariable String email) {
+        boolean isDeleted = userService.deleteUserByEmail(email);
         if (isDeleted) {
             return ResponseEntity.ok().build();
         } else {
